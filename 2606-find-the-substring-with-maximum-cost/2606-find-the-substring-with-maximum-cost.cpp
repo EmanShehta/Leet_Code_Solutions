@@ -1,38 +1,27 @@
 class Solution {
 public:
-    int maxCostSubstring(const vector<int>& costs) {
-        int n = costs.size();
-        if (n == 0) return 0;
-
-        int maxCost = 0;
-        int currentCost = 0;
-
-        for (int i = 0; i < n; i++) {
-            currentCost = max(costs[i], currentCost + costs[i]);
-            maxCost = max(maxCost, currentCost);
+     int maximumCostSubstring(string s, string chars, vector<int>& vals) {
+       vector<int>ch(26);  //set
+        for(int i=0;i<26;i++)
+        {
+            ch[i]=i+1;
         }
-
-        return maxCost;
-    }
-
-    int maximumCostSubstring(string s, string chars, vector<int>& vals) {
-        int n = s.size();
-        map<char, int> mp;
-
-        for (int i = 0; i < chars.size(); i++) {
-            mp[chars[i]] = vals[i];
+        int cnt =0;
+        for(char c:chars)   //update
+        {
+           ch[c-'a'] =vals[cnt++];
         }
-
-        vector<int> costs(n);
-        
-        for (int i = 0; i < n; i++) {
-            if (mp.find(s[i]) != mp.end()) {
-                costs[i] = mp[s[i]]; // Cost from the map
-            } else {
-                costs[i] = s[i] - 'a' + 1; // Default cost for characters not in chars
-            }
-        }
-        int result = maxCostSubstring(costs);
-        return result;
+         int maxsub=0;
+         int cur=0;
+         for(char c:s)
+         {
+             cur+=ch[c-'a'];
+             if(cur<0)
+             {
+                 cur=0;
+             }
+             maxsub=max(maxsub,cur);
+         }
+         return maxsub;
     }
 };
