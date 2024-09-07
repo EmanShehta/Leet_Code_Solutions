@@ -21,19 +21,19 @@
  */
 class Solution {
 public:
-     bool 
-         doesPathMatch(ListNode* head, TreeNode* root) {
-        if (head == nullptr) return true;
-        if (root == nullptr || head->val != root->val) return false;
-        
-return doesPathMatch(head->next, root->left) || doesPathMatch(head->next, root->right);
-    }
-    
-     bool isSubPath(ListNode* head, TreeNode* root) {
-       if(root ==nullptr) return false;
-         return isSubPath(head,root->left)||isSubPath(head,root->right)||
-             doesPathMatch(head,root);
-    }
+    bool isSubPath(ListNode* head, TreeNode* root) {
+    if (root == nullptr) return false;  // لو العقدة فاضية، مفيش حاجة نعملها
+    if (doesPathMatch(head, root)) return true;  // لو فيه تطابق يبدأ من الجذر
+    return isSubPath(head, root->left) || isSubPath(head, root->right);  // نكمل في الفروع
+}
+
+bool doesPathMatch(ListNode* head, TreeNode* root) {
+    if (head == nullptr) return true;  // لو وصلنا لآخر القائمة، يبقى فيه تطابق
+    if (root == nullptr || head->val != root->val) return false;  // لو الجذر انتهى أو القيم مختلفة
+    // نكمل مطابقة في الفروع
+    return doesPathMatch(head->next, root->left) || doesPathMatch(head->next, root->right);
+}
+
 };
 auto init = [](){
     ios::sync_with_stdio(false);
