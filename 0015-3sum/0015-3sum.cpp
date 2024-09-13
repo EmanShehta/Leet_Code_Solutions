@@ -16,17 +16,16 @@ public:
                 int sm=nums[i]+nums[j]+nums[k];
                 if(sm==0)
                 {
-                res.push_back({nums[i], nums[j], nums[k]});
-                j++;
-                k--;
-                
-                while (j < k && nums[j] == nums[j - 1]) {
+                    res.push_back({nums[i], nums[j], nums[k]});
                     j++;
-                }
-                
-                while (j < k && nums[k] == nums[k + 1]) {
                     k--;
-                }
+
+                    if (nums[j] == nums[j-1] && j < k) {
+                        j++;
+                    }
+                    while (nums[k] == nums[k+1] && j < k) {
+                        k--;
+                    }
                 }
                 else if(sm<0)
                 {
