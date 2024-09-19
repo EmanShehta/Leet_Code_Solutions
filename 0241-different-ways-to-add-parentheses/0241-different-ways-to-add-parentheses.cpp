@@ -17,7 +17,7 @@ public:
             {
                 isentirelynumber=false;
                  vector<int>left=diffWaysToCompute(expression.substr(0,i));
-                vector<int>right=diffWaysToCompute(expression.substr(i+1,expression.length()));
+vector<int>right=diffWaysToCompute(expression.substr(i+1,expression.length()));
                 
                 for(int x:left)
                 {
@@ -34,3 +34,9 @@ public:
         
     }
 };
+auto init = [](){
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    cout.tie(nullptr);
+    return 0;
+}();
